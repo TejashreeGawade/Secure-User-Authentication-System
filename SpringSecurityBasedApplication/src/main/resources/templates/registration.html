@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Registration</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+<style>
+body{
+background: #ccd9ff;
+
+
+margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  }
+.header {
+  overflow: hidden;
+  background-color: #f1f1f1;
+  padding: 20px 10px;
+  margin: 30px;
+  height: 100px;
+}
+.header a {
+  float: left;
+  color: black;
+  text-align: center;
+  padding: 12px;
+  text-decoration: none;
+  font-size: 18px; 
+  line-height: 25px;
+  border-radius: 4px;
+  background-color: #ccd9ff;
+  color: black;
+  font-weight: bold;
+  
+}
+
+.header a.logo {
+  font-size: 25px;
+  font-weight: bold;
+}
+
+.header a:hover {
+  background-color: maroon;
+  color: white;
+}
+
+
+.header-right {
+  float: right;
+}
+
+@media screen and (max-width: 500px) {
+  .header a {
+    float: none;
+    display: block;
+    text-align: left;
+  }
+  
+  .header-right {
+    float: none;
+  }
+}
+}
+* {
+  box-sizing: border-box;
+ 
+}
+
+input[type=text], select, textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  resize: vertical;
+}
+
+label {
+  padding: 12px 12px 12px 0;
+  display: inline-block;
+}
+
+input[type=submit] {
+  background-color: maroon;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  float: right;
+}
+
+input[type=submit]:hover {
+  background-color: threedshadow;
+}
+
+.container {
+  border-radius: 5px;
+  background-color: #f2f2f2;
+  padding: 20px;
+  
+}
+
+.col-25 {
+  float: left;
+  width: 25%;
+  margin-top: 6px;
+}
+
+.col-75 {
+  float: left;
+  width: 75%;
+  margin-top: 6px;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+
+@media screen and (max-width: 600px) {
+  .col-25, .col-75, input[type=submit] {
+    width: 100%;
+    margin-top: 0;
+  }
+}
+</style>
+</head>
+<body>
+
+	<!-- create navigation bar ( header) -->
+	
+	<div class="header">
+  <a  href="#" th:href="@{/}">Registration and
+					Login Module</a>
+  <div class="header-right">
+    <a class="active" href="./personform"><b>Add Person</b></a>
+	<a href="./persondetails"><b>Person Details</b></a>
+    
+  </div>
+</div>
+<!-- 	<nav class="navbar navbar-inverse navbar-fixed-top"> -->
+<!-- 		<div class="container"> -->
+<!-- 			<div class="navbar-header"> -->
+<!-- 				<button type="button" class="navbar-toggle collapsed" -->
+<!-- 					data-toggle="collapse" data-target="#navbar" aria-expanded="false" -->
+<!-- 					aria-controls="navbar"> -->
+<!-- 					<span class="sr-only">Toggle navigation</span> <span -->
+<!-- 						class="icon-bar"></span> <span class="icon-bar"></span> <span -->
+<!-- 						class="icon-bar"></span> -->
+<!-- 				</button> -->
+<!-- 				<a class="navbar-brand" href="#" th:href="@{/}">Registration and -->
+<!-- 					Login Module</a> -->
+<!-- 			</div> -->
+<!-- 		</div> -->
+<!-- 	</nav> -->
+
+<br>
+<br>
+	<!-- Create HTML registration form -->
+	<div class="container">
+		<div class="row">
+			<div class="col-md-6 col-md-offset-3">
+
+				<!-- success message -->
+				
+
+				<h1>Registration</h1>
+				<!-- @ is showing context path of App and /registration is url -->
+				<!-- ${user} data enterd on regitration form will store in User object directly -->
+				<form th:action="@{/registration}" method="post" th:object="${user}">
+					<!-- this success comes from UserRegistrationController return "redirect:/registration?success" -->
+					<div th:if="${param.success}">
+					<div class="alert alert-info">You've successfully registered
+						to  Login app!</div>
+				</div>
+					<div class="form-group">
+						<label class="control-label" for="firstName"> First Name </label>
+						<input id="firstName" class="form-control" th:field="*{firstName}"
+							required autofocus="autofocus" />
+					</div>
+
+					<div class="form-group">
+						<label class="control-label" for="lastName"> Last Name </label> <input
+							id="lastName" class="form-control" th:field="*{lastName}"
+							required autofocus="autofocus" />
+					</div>
+
+					<div class="form-group">
+						<label class="control-label" for="email"> Email </label> <input
+							id="email" class="form-control" th:field="*{email}" required
+							autofocus="autofocus" />
+					</div>
+
+					<div class="form-group">
+						<label class="control-label" for="password"> Password </label> <input
+							id="password" class="form-control" type="password"
+							th:field="*{password}" required autofocus="autofocus" />
+					</div>
+
+					<div class="form-group">
+						<button type="submit" class="btn btn-success">Register</button>
+						<span>Already registered? <a href="/" th:href="@{/login}">Login
+								here</a></span>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
